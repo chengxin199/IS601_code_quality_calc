@@ -1,150 +1,170 @@
-# Module 2: Introduction to VSCode, Python, and Testing
+# Module 3: Introduction to Object-Oriented Programming (OOP) and Advanced Testing in Python
 
 ## Module Overview
-This module introduces students to integrated development environments (IDEs), specifically Visual Studio Code (VSCode), and how to set up a Python development environment. Students will learn to use Python with pytest for testing, create virtual environments, and understand basic Python programming concepts like functions and variables. By the end of this module, students will be able to set up a project using GIT and GitHub that includes a simple calculator application, with automated testing using GitHub Actions.
+Welcome to **Module 3**, where you will transition from functional programming to **Object-Oriented Programming (OOP)** in Python. This module is designed to deepen your understanding of Python by introducing OOP principles and advanced testing techniques. You will engage with a hands-on codebase that serves as your primary textbook, including a simple calculator application (`calculator/__init__.py`), an operations module (`operations/__init__.py`), and corresponding test files (`tests/test_calculator.py` and `tests/test_operations.py`). Each file is thoroughly commented to guide you through essential programming concepts and best practices in Python.
 
-### Why VSCode, Python, and Testing?
-VSCode is a powerful, open-source IDE that supports many programming languages and has numerous extensions to enhance development productivity. Python is a versatile programming language widely used in various fields, including web development, data science, and automation. Testing is crucial to ensure code reliability and maintainability, and pytest is a popular testing framework for Python. GitHub Actions allow automated workflows to build, test, and deploy code, integrating continuous integration/continuous deployment (CI/CD) practices.
+By studying and interacting with this code, you'll gain practical experience in implementing OOP principles such as classes and static methods, building interactive command-line interfaces using the REPL (Read-Eval-Print Loop) pattern, applying the DRY (Don't Repeat Yourself) principle, handling errors gracefully, and ensuring code reliability through parameterized testing with `pytest`.
 
-### Learning Outcomes
-- Utilize GIT for version control and collaborative development.
-- Create Python applications with automated testing.
+## Why Object-Oriented Programming and Advanced Testing?
+**Object-Oriented Programming (OOP)** is a fundamental paradigm that enhances code organization, reusability, and scalability. By encapsulating related functionalities within classes, you can create more intuitive and manageable codebases. This module introduces you to OOP concepts such as classes, static methods, and encapsulation, building upon your previous knowledge of functions.
 
-## Module 2 Learning Pathway
+**Advanced Testing** ensures that your applications are reliable and maintainable. Parameterized tests allow you to run the same test logic with different input values efficiently, increasing your test coverage and reducing code duplication. Mastery of testing frameworks like `pytest` is crucial for developing robust Python applications. Additionally, achieving **100% test coverage** ensures that all parts of your code are tested, minimizing the risk of hidden bugs and enhancing code quality.
+
+## Learning Outcomes
+By the end of this module, you will be able to:
+- **Understand and Apply OOP Principles:** Utilize classes and static methods to structure your Python programs effectively.
+- **Develop Command-Line Applications:** Create interactive command-line interfaces using the REPL pattern.
+- **Implement Best Practices:** Apply the DRY (Don't Repeat Yourself) principle and other coding best practices to write maintainable and efficient Python code.
+- **Handle Errors Gracefully:** Develop comprehensive error handling strategies to create resilient applications.
+- **Conduct Advanced Testing:** Write and execute parameterized unit and integration tests using `pytest` to ensure the reliability and correctness of your applications.
+- **Achieve Comprehensive Test Coverage:** Ensure that your code achieves 100% test coverage, verifying that all code paths are tested.
+- **Integrate Continuous Integration (CI):** Configure GitHub Actions to automatically run your tests and enforce 100% test coverage, ensuring code quality and reliability.
+
+## Module 3 Learning Pathway
 
 ### Recall
 
-**Title:** Prior Experience with Python and VSCode  
+**Title:** Prior Experience with Python Programming and Functional Programming  
 **Grading Type:** Points  
 **Instructions:** 
-- Participate in a discussion forum to share your previous experiences with Python and VSCode.
-- Discuss any challenges you faced and how you resolved them.
-- This activity will help gauge your familiarity with these tools and set the stage for the new material.
+- **Discussion Forum:** Share your previous experiences with Python programming, specifically focusing on functional programming, control structures, and command-line interfaces.
+- **Reflection:** Discuss any challenges you faced in these areas and the strategies you used to overcome them.
+- **Quiz:** Complete a brief quiz to assess your current understanding of Python control structures and functional programming concepts.
+- **Purpose:** This activity will help gauge your familiarity with these concepts and prepare you for the new material.
 
 ### Read
 
-1. **Article: "Getting Started with Visual Studio Code"**
-   - URL: [Getting Started with VSCode](https://code.visualstudio.com/docs/introvideos/basics)
-   - Purpose: To guide you through the installation and basic usage of VSCode.
+Your **primary textbook** for this module is the provided codebase. Each file is meticulously commented to explain the underlying concepts and best practices. Here’s a breakdown of the key components:
 
-2. **Article: "Python and VSCode"**
-   - URL: [Python in VSCode](https://code.visualstudio.com/docs/python/python-tutorial)
-   - Purpose: To help you set up Python development in VSCode.
+1. **`app/calculator__init__.py`**
+   - **Purpose:** Implements a simple calculator using Python’s REPL pattern.
+   - **Key Concepts:** 
+     - Control structures (`while` loops, `if-elif-else` statements)
+     - User input handling
+     - Error handling with `try-except` blocks
+     - Modular code organization by importing from `operations.py`
 
-3. **Article: "Virtual Environments in Python"**
-   - URL: [Virtual Environments](https://docs.python.org/3/tutorial/venv.html)
-   - Purpose: To introduce you to creating and using virtual environments in Python.
+2. **`app/operations/__init__.py`**
+   - **Purpose:** Contains the `Operations` class with static methods for basic arithmetic operations.
+   - **Key Concepts:**
+     - **Classes and Static Methods:** Understand how to encapsulate related functionalities within a class using static methods.
+     - **Encapsulation:** Group related functions together to enhance code organization and reusability.
+     - **Input Validation and Error Raising:** Implement robust input validation and error handling within class methods.
 
-4. **Article: "Introduction to pytest"**
-   - URL: [Introduction to pytest](https://docs.pytest.org/en/stable/getting-started.html)
-   - Purpose: To familiarize you with the basics of testing Python code using pytest.
+3. **`tests/test_calculator.py`**
+   - **Purpose:** Provides unit tests for the calculator REPL application.
+   - **Key Concepts:**
+     - Using `pytest` for testing
+     - Simulating user input with `monkeypatch`
+     - Capturing and asserting output
 
-5. **Article: "GitHub Actions: Basics"**
-   - URL: [GitHub Actions](https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions)
-   - Purpose: To understand the basics of GitHub Actions for CI/CD.
-_____NEW_______
+4. **`tests/test_operations.py`**
+   - **Purpose:** Contains parameterized tests for the `Operations` class methods.
+   - **Key Concepts:**
+     - **Parameterized Testing:** Run the same test logic with different input values to enhance test coverage.
+     - Testing positive and negative scenarios
+     - Ensuring proper exception handling
 
-6. **Article: "Building Command-Line Applications in Python"**
-   - URL: [Command-Line Applications in Python](https://realpython.com/command-line-interfaces-python-argparse/)
-   - Purpose: To learn techniques for creating interactive command-line applications.
-
-7. **Article: "DRY (Don't Repeat Yourself) Principle in Python"**
-   - URL: [DRY Principle](https://www.makeuseof.com/python-dry-principle/)
-   - Purpose: To understand and apply the DRY principle for writing maintainable and efficient Python code.
-
-8. **Article: "Comprehensive Guide to Testing in Python"**
-   - URL: [Testing in Python](https://realpython.com/python-testing/)
-   - Purpose: To learn comprehensive testing strategies using pytest.
-
+**Supplementary Articles:**
+To complement your understanding of the codebase, please read the following articles:
+1. **[Mastering Python Control Structures](https://realpython.com/python-conditional-statements/)**
+2. **[Introduction to Object-Oriented Programming in Python](https://realpython.com/python3-object-oriented-programming/)**
+3. **[Building Command-Line Applications in Python](https://realpython.com/command-line-interfaces-python-argparse/)**
+4. **[Implementing the REPL Pattern in Python](https://realpython.com/python-repl/)**
+5. **[DRY (Don't Repeat Yourself) Principle in Python](https://www.makeuseof.com/python-dry-principle/)**
+6. **[Look Before You Leap vs. Easier to Ask Forgiveness than Permission](https://realpython.com/python-lbyl-vs-eafp/)**
+7. **[Error Handling in Python: A Deep Dive](https://realpython.com/python-exceptions/)**
+8. **[Comprehensive Guide to Testing in Python](https://realpython.com/python-testing/)**
 
 ### Watch
 
-1. **Video: "Introduction to VSCode" (15 minutes)**
-   - Purpose: To provide an overview of VSCode, its features, and how to set it up for Python development.
+Engage with the following instructional videos to reinforce the concepts covered in the codebase and readings:
+1. **Video: Instructor Video**
 
-2. **Video: "Python and Testing with pytest" (15 minutes)**
-   - Purpose: To demonstrate setting up Python, creating virtual environments, and writing tests using pytest.
-
-3. **Video: "Setting Up GitHub Actions" (15 minutes)**
-   - Purpose: To provide a visual guide to setting up GitHub Actions for automated testing.
-
-### Review
-
-1. **Resource: VSCode Cheat Sheet**
-   - [VSCode Cheat Sheet](https://vscodecandothat.com/)
-   - Purpose: To provide you with a quick reference for using VSCode.
-
-2. **Resource: Python Basics Cheat Sheet**
-   - [Python Basics](https://www.pythonsheets.com/)
-   - Purpose: To provide a quick reference for basic Python syntax and functions.
-
-3. **Resource: pytest Cheat Sheet**
-   - [pytest Cheat Sheet](https://www.cheatography.com/oleksii/cheat-sheets/pytest/)
-   - Purpose: To offer a quick reference for writing and running tests using pytest.
 
 ### Submit
 
-**Activity Type:** Hands-on Assignment  
+**Activity Type:** Advanced Hands-on Assignment  
 
-**Activity Title:** Calculator Project with Automated Tests  
+**Activity Title:** Interactive Calculator Command-Line Application  
 
 **Grading Type:** Points  
 
-**Submission Instructions:** Submit a link to your repository on Canvas.
+**Submission Instructions:** Submit a link to your GitHub repository containing the project.
 
 **Instructions:** 
-- Create a new Git repository locally and a repository on GitHub. You will upload/push your local repo to GitHub.
-- Set up a Python project in VSCode.
-- Create a virtual environment for your project.
-- Write a simple command line calculator application that includes functions for addition, subtraction, multiplication, and division.
-- Write tests for each calculator function using pytest.
-- Configure GitHub Actions to run your tests automatically on each push to the repository.
-- Push your code and configuration to GitHub and ensure that GitHub Actions runs your tests successfully.
+- **Repository Setup:**
+  - Initialize a new Git repository locally and create a corresponding repository on GitHub.
+  - Set up a Python project in your preferred IDE with a well-structured directory layout.
+  - Create and activate a virtual environment for your project.
+  
+- **Application Development:**
+  - Develop a command-line calculator application with the following features:
+    - **REPL Interface:** Implement a Read-Eval-Print Loop for continuous user interaction.
+    - **Arithmetic Operations:** Allow users to perform addition, subtraction, multiplication, and division.
+    - **User Prompts:**
+      - Prompt for the desired operation and the numbers to operate on.
+      - Provide clear instructions and feedback to the user.
+    - **Input Validation:** Validate user inputs to ensure they follow the expected format and handle invalid inputs gracefully.
+    - **Error Handling:** Handle errors such as invalid inputs and division by zero gracefully, providing meaningful messages to the user.
 
-**Grading Expectations:** Completeness and accuracy of the calculator application and tests, proper use of GIT commands, successful setup of GitHub Actions for automated testing, and correct implementation of Python virtual environments.
+- **Best Practices:**
+  - **DRY Principle:** Apply the DRY principle and other best practices to ensure your code is maintainable and efficient.
+  
+- **Testing:**
+  - **Unit Tests:** Write comprehensive unit tests using `pytest` to verify the functionality of individual components.
+  - **Parameterized Tests:** Implement parameterized tests in `tests/test_operations.py` to cover various input scenarios efficiently.
+  - **Test Coverage:** Achieve **100% test coverage** for your application, ensuring that all code paths are tested.
+  
+- **Documentation:**
+  - Create detailed documentation, including a `README.md` file with setup and usage instructions.
+  
+- **Version Control & CI:**
+  - Push your code to GitHub, ensuring it follows best practices for code organization and documentation.
+  - **Configure GitHub Actions:**
+    - Set up GitHub Actions to automatically run your tests on each push to the repository.
+    - Ensure that GitHub Actions checks for 100% test coverage. The CI pipeline should only pass if all tests pass and the test coverage meets 100%. If the coverage is below 100%, the build should fail, prompting you to add the necessary tests.
+
+**Grading Expectations:** 
+- **Functionality:** Completeness and accuracy of the calculator command-line application.
+- **User Interface:** Proper implementation of the REPL pattern and a user-friendly interface.
+- **Code Quality:** Efficient use of Python control structures, adherence to the DRY principle, and other professional coding practices.
+- **Error Handling:** Comprehensive error handling mechanisms.
+- **Testing:** 
+  - Thorough unit and parameterized testing using `pytest`.
+  - Achieving 100% test coverage as enforced by GitHub Actions.
+- **Documentation:** Well-structured code with comprehensive documentation.
+- **Automation:** Successful setup of GitHub Actions for automated testing and coverage enforcement.
 
 **Alignment:** 
-- Utilize GIT for version control and collaborative development.
-- Create Python applications with automated testing.
+- Implement Python control structures effectively in a command-line application.
+- Apply the DRY principle and other best practices for writing maintainable Python code.
+- Develop a command-line application using the REPL pattern.
+- Implement comprehensive error handling strategies in Python.
+- Write and execute unit and parameterized tests for Python applications using `pytest`.
+- Achieve and enforce 100% test coverage through Continuous Integration with GitHub Actions.
 
 ### Reflect
 
-**Title:** Module 2 Reflection  
+**Title:** Module 3 In-Depth Reflection  
 **Grading Type:** Points  
-**Instructions:** 
-- Write a brief reflection (150-200 words) on your experience setting up the Python development environment and writing tests.
-- Discuss how confident you feel using the tools and any areas where you need further clarification or support.
-- This activity aims to encourage metacognition and connect new knowledge with prior experiences.
+**Instructions:**
+- **Reflection Essay:** Compose a comprehensive reflection (300-400 words) on your experience developing the interactive calculator command-line application.
+  - **Application of Concepts:** Analyze how the concepts learned in this module can be applied to real-world programming scenarios.
+  - **Challenges and Solutions:** Discuss any challenges you encountered during the project and the strategies you used to overcome them.
+  - **Self-Evaluation:** Evaluate your current level of confidence in using these tools and identify areas where you need further practice or support.
+- **Purpose:** This activity aims to encourage deep metacognition and help you connect new knowledge with prior experiences and future applications.
 
 ### Quiz
 
-**Title:** VSCode, Python, and Testing Basics Quiz  
+**Title:** Advanced Python Programming and Command-Line Application Development Quiz  
 **Grading Type:** Points  
-**Instructions:** 
-- Complete a quiz covering the key concepts and commands introduced in this module.
-- The quiz will test your understanding of setting up VSCode, using Python and virtual environments, writing tests with pytest, and configuring GitHub Actions.
-- Review the provided cheat sheets and tutorials before taking the quiz.
+**Instructions:**
+- **Comprehensive Assessment:** Complete a comprehensive quiz covering the advanced concepts and techniques introduced in this module.
+  - **Topics Covered:** Control structures, Object-Oriented Programming (OOP) principles, command-line application development, REPL pattern implementation, application of the DRY principle, error handling strategies, and testing with `pytest`.
+  - **Question Types:** The quiz will include multiple-choice, short answer, and code analysis questions to thoroughly evaluate your comprehension and application of the module's content.
+- **Preparation:** Review all provided materials, including cheat sheets, tutorials, and your project code before taking the quiz.
 
-### Additional Information
+---
 
-#### Installing Python on Mac
-Mac users will need to install Python and manage packages. Follow these steps:
-
-1. **Install Python:**
-   - Open the Terminal application.
-   - Paste the following command and press Enter:
-     ```sh
-     brew install python
-     ```
-   - Follow the on-screen instructions to complete the installation.
-
-2. **Verify the Installation:**
-   - Type the following command and press Enter:
-     ```sh
-     python3 --version
-     ```
-   - You should see the installed version of Python.
-
-3. **Install VSCode:**
-   - Download and install VSCode from the official website: [Visual Studio Code](https://code.visualstudio.com/).
-   - Follow the on-screen instructions to complete the installation.
+This comprehensive module leverages the provided codebase as your primary textbook, allowing you to learn by doing. By engaging with the commented code, completing hands-on assignments, and reflecting on your learning process, you will build a strong foundation in Object-Oriented Programming and advanced testing in Python. Embrace the opportunity to write clean, efficient, and thoroughly tested code, ensuring high-quality applications through 100% test coverage and automated CI processes.
