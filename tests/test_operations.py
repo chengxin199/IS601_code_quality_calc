@@ -64,10 +64,9 @@ def test_addition(a: Number, b: Number, expected: Number) -> None:
     >>> test_addition(-1, 1, 0)
     """
     # Create an instance of the Operations class
-    operations = Operations()
     
     # Call the 'addition' method with the provided arguments
-    result = operations.addition(a, b)
+    result = Operations.addition(a, b)
     
     # Assert that the result of addition(a, b) matches the expected value
     assert result == expected, f"Expected addition({a}, {b}) to be {expected}, but got {result}"
@@ -115,10 +114,9 @@ def test_subtraction(a: Number, b: Number, expected: Number) -> None:
     >>> test_subtraction(-5, -3, -2)
     """
     # Create an instance of the Operations class
-    operations = Operations()
     
     # Call the 'subtraction' method with the provided arguments
-    result = operations.subtraction(a, b)
+    result = Operations().subtraction(a, b)
     
     # Assert that the result of subtraction(a, b) matches the expected value
     assert result == expected, f"Expected subtraction({a}, {b}) to be {expected}, but got {result}"
@@ -165,11 +163,9 @@ def test_multiplication(a: Number, b: Number, expected: Number) -> None:
     >>> test_multiplication(2, 3, 6)
     >>> test_multiplication(-2, -3, 6)
     """
-    # Create an instance of the Operations class
-    operations = Operations()
     
     # Call the 'multiplication' method with the provided arguments
-    result = operations.multiplication(a, b)
+    result = Operations.multiplication(a, b)
     
     # Assert that the result of multiplication(a, b) matches the expected value
     assert result == expected, f"Expected multiplication({a}, {b}) to be {expected}, but got {result}"
@@ -216,11 +212,8 @@ def test_division(a: Number, b: Number, expected: float) -> None:
     >>> test_division(6, 3, 2.0)
     >>> test_division(-6, 3, -2.0)
     """
-    # Create an instance of the Operations class
-    operations = Operations()
-    
     # Call the 'division' method with the provided arguments
-    result = operations.division(a, b)
+    result = Operations.division(a, b)
     
     # Assert that the result of division(a, b) matches the expected value
     assert result == expected, f"Expected division({a}, {b}) to be {expected}, but got {result}"
@@ -263,13 +256,11 @@ def test_division_by_zero(a: Number, b: Number) -> None:
     >>> test_division_by_zero(1, 0)
     >>> test_division_by_zero(-1, 0)
     """
-    # Create an instance of the Operations class
-    operations = Operations()
     
     # Use pytest's context manager to check for a ValueError when dividing by zero
     with pytest.raises(ValueError, match="Division by zero is not allowed.") as excinfo:
         # Attempt to divide 'a' by 'b', which should raise a ValueError
-        operations.division(a, b)
+        Operations.division(a, b)
     
     # Assert that the exception message contains the expected error message
     assert "Division by zero is not allowed." in str(excinfo.value), \
