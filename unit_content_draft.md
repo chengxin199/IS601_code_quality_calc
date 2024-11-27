@@ -12,13 +12,8 @@ By studying and interacting with this code, you'll gain practical experience in 
 
 ## Learning Outcomes
 By the end of this module, you will be able to:
-- **Understand and Apply OOP Principles:** Utilize classes and static methods to structure your Python programs effectively.
-- **Develop Command-Line Applications:** Create interactive command-line interfaces using the REPL pattern.
-- **Implement Best Practices:** Apply the DRY (Don't Repeat Yourself) principle and other coding best practices to write maintainable and efficient Python code.
-- **Handle Errors Gracefully:** Develop comprehensive error handling strategies to create resilient applications.
-- **Conduct Advanced Testing:** Write and execute parameterized unit and integration tests using `pytest` to ensure the reliability and correctness of your applications.
-- **Achieve Comprehensive Test Coverage:** Ensure that your code achieves 100% test coverage, verifying that all code paths are tested.
-- **Integrate Continuous Integration (CI):** Configure GitHub Actions to automatically run your tests and enforce 100% test coverage, ensuring code quality and reliability.
+- CLO 6: Implement object-oriented programming principles in Python.
+- CLO 7: Apply professional terminology and concepts related to web systems development.
 
 ## Module 3 Learning Pathway
 
