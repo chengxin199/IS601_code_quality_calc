@@ -19,8 +19,8 @@ By the end of this module, you will be able to:
 
 Videos:
 
-[Module 3 Overview](https://youtu.be/Vy52g99WqFI)
-[Module 3 Hands on](https://youtu.be/P8jmJe9js-0)
+- [Module 3 Overview](https://youtu.be/Vy52g99WqFI)
+- [Module 3 Hands on](https://youtu.be/P8jmJe9js-0)
 
 
 ### Recall
