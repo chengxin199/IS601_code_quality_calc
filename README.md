@@ -6,17 +6,21 @@
 # 📦 Calculator — Defensive Programming (A1) Workshop
 
 This repository contains a small calculator exercise used for the A1 lesson: Defensive Programming, Errors, and Contracts. The goal is to harden arithmetic operations, add clear error handling and logs, and add tests that cover error paths.
+# 📦 Calculator — Defensive Programming (A1) Workshop
+
+This repository contains a small calculator exercise used for the A1 lesson: Defensive Programming, Errors, and Contracts. The goal is to harden arithmetic operations, add clear error handling and logs, and add tests that cover error paths.
 
 ---
 
 ## Repository layout (important files)
 - `app/`
-  - `operations.py`        — hardened calculator operations
-  - `exceptions.py`        — custom exceptions
-  - `__init__.py`
+  - `operations_impl.py`  — hardened calculator operations implementation
+  - `exceptions.py`       — custom exceptions
+  - `operations/`         — package shim re-exporting `Operations`
 - `tests/`
   - `test_operations.py`   — original functional tests
-  - `test_error_paths.py`  — (optional) added tests for errors/logging
+  - `test_error_paths.py`  — tests for errors/logging
+- `modules/`               — course modules (A1 unit lives here)
 - `venv/`                  — virtualenv (project-local)
 - `.github/workflows/tests.yml` — CI that runs pytest
 
@@ -147,52 +151,49 @@ Outcomes:
 
 ```python
 class CalculatorError(Exception):
-   """Base exception for calculator errors."""
-   pass
+    """Base exception for calculator errors."""
+    pass
 
 class DivisionByZeroError(ValueError, CalculatorError):
-   """Raised when division by zero is attempted."""
-   pass
+    """Raised when division by zero is attempted."""
+    pass
 
 class InvalidOperandError(TypeError, CalculatorError):
-   """Raised when operands are of invalid type."""
-   pass
+    """Raised when operands are of invalid type."""
+    pass
 ```
 
-- Guard clause and logging (in `app/operations.py`):
+- Guard clause and logging (in `app/operations_impl.py`):
 
 ```python
 import logging
 from typing import Union
 
-from .exceptions import DivisionByZeroError, InvalidOperandError
+from app.exceptions import DivisionByZeroError, InvalidOperandError
 
 Number = Union[int, float]
 logger = logging.getLogger("app.operations")
 
 def _check_number(x: object, name: str) -> None:
-   if not isinstance(x, (int, float)):
-      logger.debug("Invalid operand type: %s=%r", name, x)
-      raise InvalidOperandError(f"Operand '{name}' must be int or float, got {type(x).__name__}")
+    if not isinstance(x, (int, float)):
+        logger.debug("Invalid operand type: %s=%r", name, x)
+        raise InvalidOperandError(f"Operand '{name}' must be int or float, got {type(x).__name__}")
 
 class Operations:
-   @staticmethod
-   def addition(a: Number, b: Number) -> Number:
-      _check_number(a, "a")
-      _check_number(b, "b")
-      return a + b
+    @staticmethod
+    def addition(a: Number, b: Number) -> Number:
+        _check_number(a, "a")
+        _check_number(b, "b")
+        return a + b
 
-   @staticmethod
-   def division(a: Number, b: Number) -> float:
-      _check_number(a, "a")
-      _check_number(b, "b")
-      if b == 0:
-         logger.error("Division by zero attempt: a=%r, b=%r", a, b)
-         raise DivisionByZeroError("Division by zero is not allowed.")
-      result = a / b
-      if not isinstance(result, float):
-         result = float(result)
-      return result
+    @staticmethod
+    def division(a: Number, b: Number) -> float:
+        _check_number(a, "a")
+        _check_number(b, "b")
+        if b == 0:
+            logger.error("Division by zero attempt: a=%r, b=%r", a, b)
+            raise DivisionByZeroError("Division by zero is not allowed.")
+        return float(a / b)
 ```
 
 ---
@@ -214,11 +215,8 @@ class Operations:
 
 ## Want help?
 I can:
-- create or update the example files (`app/exceptions.py`, `app/operations.py`) for you,
+- create or update the example files (`app/exceptions.py`, `app/operations_impl.py`) for you,
 - run the tests and report the output,
 - generate an instructor rubric and slides for the A1 lesson.
 
 Tell me which you want next and I will proceed.
-
-````
-git push origin main
