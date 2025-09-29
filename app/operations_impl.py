@@ -46,7 +46,5 @@ class Operations:
         if b == 0:
             logger.error("Division by zero attempt: a=%r, b=%r", a, b)
             raise DivisionByZeroError("Division by zero is not allowed.")
-        result = a / b
-        if not isinstance(result, float):
-            result = float(result)
-        return result
+        # Ensure a float result consistently (remove conditional branch)
+        return float(a / b)
