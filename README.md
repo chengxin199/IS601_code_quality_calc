@@ -2,263 +2,223 @@
 
 ---
 
-# 🧩 1. Install Homebrew (Mac Only)
+````markdown
+# 📦 Calculator — Defensive Programming (A1) Workshop
 
-> Skip this step if you're on Windows.
-
-Homebrew is a package manager for macOS.  
-You’ll use it to easily install Git, Python, Docker, etc.
-
-**Install Homebrew:**
-
-```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-```
-
-**Verify Homebrew:**
-
-```bash
-brew --version
-```
-
-If you see a version number, you're good to go.
+This repository contains a small calculator exercise used for the A1 lesson: Defensive Programming, Errors, and Contracts. The goal is to harden arithmetic operations, add clear error handling and logs, and add tests that cover error paths.
 
 ---
 
-# 🧩 2. Install and Configure Git
-
-## Install Git
-
-- **MacOS (using Homebrew)**
-
-```bash
-brew install git
-```
-
-- **Windows**
-
-Download and install [Git for Windows](https://git-scm.com/download/win).  
-Accept the default options during installation.
-
-**Verify Git:**
-
-```bash
-git --version
-```
+## Repository layout (important files)
+- `app/`
+  - `operations.py`        — hardened calculator operations
+  - `exceptions.py`        — custom exceptions
+  - `__init__.py`
+- `tests/`
+  - `test_operations.py`   — original functional tests
+  - `test_error_paths.py`  — (optional) added tests for errors/logging
+- `venv/`                  — virtualenv (project-local)
+- `.github/workflows/tests.yml` — CI that runs pytest
 
 ---
 
-## Configure Git Globals
+## Prerequisites
+- Python 3.10+ (Linux/macOS/Windows)
+- Git
+- Virtualenv recommended
 
-Set your name and email so Git tracks your commits properly:
-
-```bash
-git config --global user.name "Your Name"
-git config --global user.email "your_email@example.com"
-```
-
-Confirm the settings:
-
-```bash
-git config --list
-```
-
----
-
-## Generate SSH Keys and Connect to GitHub
-
-> Only do this once per machine.
-
-1. Generate a new SSH key:
-
-```bash
-ssh-keygen -t ed25519 -C "your_email@example.com"
-```
-
-(Press Enter at all prompts.)
-
-2. Start the SSH agent:
-
-```bash
-eval "$(ssh-agent -s)"
-```
-
-3. Add the SSH private key to the agent:
-
-```bash
-ssh-add ~/.ssh/id_ed25519
-```
-
-4. Copy your SSH public key:
-
-- **Mac/Linux:**
-
-```bash
-cat ~/.ssh/id_ed25519.pub | pbcopy
-```
-
-- **Windows (Git Bash):**
-
-```bash
-cat ~/.ssh/id_ed25519.pub | clip
-```
-
-5. Add the key to your GitHub account:
-   - Go to [GitHub SSH Settings](https://github.com/settings/keys)
-   - Click **New SSH Key**, paste the key, save.
-
-6. Test the connection:
-
-```bash
-ssh -T git@github.com
-```
-
-You should see a success message.
-
----
-
-# 🧩 3. Clone the Repository
-
-Now you can safely clone the course project:
-
-```bash
-git clone <repository-url>
-cd <repository-directory>
-```
-
----
-
-# 🛠️ 4. Install Python 3.10+
-
-## Install Python
-
-- **MacOS (Homebrew)**
-
-```bash
-brew install python
-```
-
-- **Windows**
-
-Download and install [Python for Windows](https://www.python.org/downloads/).  
-✅ Make sure you **check the box** `Add Python to PATH` during setup.
-
-**Verify Python:**
-
-```bash
-python3 --version
-```
-or
-```bash
-python --version
-```
-
----
-
-## Create and Activate a Virtual Environment
-
-(Optional but recommended)
+## Quick local setup
+1. Create & activate a venv (if not present):
 
 ```bash
 python3 -m venv venv
 source venv/bin/activate   # Mac/Linux
-venv\Scripts\activate.bat  # Windows
+venv\Scripts\activate.bat  # Windows (PowerShell/CMD)
 ```
 
-### Install Required Packages
+2. Install test deps (if requirements are provided):
 
 ```bash
-pip install -r requirements.txt
+pip install -r requirements.txt || pip install pytest
 ```
 
----
-
-# 🐳 5. (Optional) Docker Setup
-
-> Skip if Docker isn't used in this module.
-
-## Install Docker
-
-- [Install Docker Desktop for Mac](https://www.docker.com/products/docker-desktop/)
-- [Install Docker Desktop for Windows](https://www.docker.com/products/docker-desktop/)
-
-## Build Docker Image
+3. Run full test suite:
 
 ```bash
-docker build -t <image-name> .
-```
-
-## Run Docker Container
-
-```bash
-docker run -it --rm <image-name>
+venv/bin/py.test -q
 ```
 
 ---
 
-# 🚀 6. Running the Project
-
-- **Without Docker**:
+## Useful test commands
+- Run all tests (quiet):
 
 ```bash
-python main.py
+venv/bin/py.test -q
 ```
-
-(or update this if the main script is different.)
-
-- **With Docker**:
+- Run a single test function:
 
 ```bash
-docker run -it --rm <image-name>
+venv/bin/py.test -q tests/test_operations.py::test_division_by_zero
+```
+- Run a single test file:
+
+```bash
+venv/bin/py.test -q tests/test_error_paths.py
+```
+- Run with verbose output and stop at first failure:
+
+```bash
+venv/bin/py.test -vv --maxfail=1
 ```
 
 ---
 
-# 📝 7. Submission Instructions
-
-After finishing your work:
+## Adding instructor references locally
+Create a `references/` folder and clone any auxiliary repo there so the content is available to students and the AI for local reading:
 
 ```bash
-git add .
-git commit -m "Complete Module X"
+mkdir -p references
+git clone <REPO_URL> references/<repo-name>
+```
+
+Replace `<REPO_URL>` and `<repo-name>` with the appropriate values.
+
+---
+
+## GitHub Classroom / CI notes
+- This repo contains a GitHub Actions workflow at `.github/workflows/tests.yml` that runs `pytest` on pushes/PRs. Classroom will run tests automatically for student submissions when configured.
+- Keep tests deterministic and avoid printing secrets. Logs may include non-sensitive inputs or IDs for context.
+
+---
+
+## A1 Lesson: Defensive Programming — Overview (3–4h)
+Goal: write resilient code that fails fast, communicates intent, and recovers gracefully.
+
+Topics covered:
+- EAFP vs LBYL and when to use each
+- Invariants, assertions, guard clauses
+- Python exceptions hierarchy, custom exceptions, error boundaries
+- Design by contract (pre-/post-conditions)
+- Sentinel values vs exceptions; logging basics
+
+Before you start (preflight):
+- Repo cloned; tests run locally (`venv/bin/py.test -q`)
+- Python >= 3.10; venv active
+- CI configured with pytest + coverage (see `.github/workflows/tests.yml`)
+
+Outcomes:
+- Choose EAFP or LBYL appropriately and justify the choice
+- Implement clear error handling with actionable messages
+- Add targeted tests for error paths and contracts
+
+---
+
+## Hands-on tasks (step-by-step)
+1. Preflight (15 min)
+   - Activate venv and run tests: `venv/bin/py.test -q`.
+   - Read `tests/test_operations.py` to understand expected behaviour.
+
+2. Quick discussion (30 min)
+   - Small examples showing EAFP vs LBYL.
+
+3. Harden the code (90–120 min)
+   - Add custom exceptions in `app/exceptions.py` (subclass built-ins for compatibility).
+   - Introduce guard clauses to validate input types and pre-conditions.
+   - Replace ambiguous return codes with exceptions.
+   - Add logging at error boundaries that includes non-sensitive context (inputs/IDs).
+   - Add post-condition checks where helpful (e.g., division returns `float`).
+
+4. Tests (30 min)
+   - Add at least two tests covering error paths (e.g., non-number operand, division-by-zero).
+   - Use `caplog` to assert log messages include context without secrets.
+
+5. CI verification (15–30 min)
+   - Push changes and confirm GitHub Actions run tests successfully.
+
+6. Reflection (15–30 min)
+   - Which guard clause or assertion prevented a bug?
+   - EAFP vs LBYL tradeoffs in your decisions.
+
+---
+
+## Quick coding examples (safe, small)
+- Custom exceptions (in `app/exceptions.py`):
+
+```python
+class CalculatorError(Exception):
+   """Base exception for calculator errors."""
+   pass
+
+class DivisionByZeroError(ValueError, CalculatorError):
+   """Raised when division by zero is attempted."""
+   pass
+
+class InvalidOperandError(TypeError, CalculatorError):
+   """Raised when operands are of invalid type."""
+   pass
+```
+
+- Guard clause and logging (in `app/operations.py`):
+
+```python
+import logging
+from typing import Union
+
+from .exceptions import DivisionByZeroError, InvalidOperandError
+
+Number = Union[int, float]
+logger = logging.getLogger("app.operations")
+
+def _check_number(x: object, name: str) -> None:
+   if not isinstance(x, (int, float)):
+      logger.debug("Invalid operand type: %s=%r", name, x)
+      raise InvalidOperandError(f"Operand '{name}' must be int or float, got {type(x).__name__}")
+
+class Operations:
+   @staticmethod
+   def addition(a: Number, b: Number) -> Number:
+      _check_number(a, "a")
+      _check_number(b, "b")
+      return a + b
+
+   @staticmethod
+   def division(a: Number, b: Number) -> float:
+      _check_number(a, "a")
+      _check_number(b, "b")
+      if b == 0:
+         logger.error("Division by zero attempt: a=%r, b=%r", a, b)
+         raise DivisionByZeroError("Division by zero is not allowed.")
+      result = a / b
+      if not isinstance(result, float):
+         result = float(result)
+      return result
+```
+
+---
+
+## Acceptance criteria (CI-verifiable)
+- Tests pass locally and on CI (`venv/bin/py.test -q`).
+- At least two new tests cover error paths (use `caplog` for logging assertions).
+- No bare `except:` blocks in the codebase.
+- Custom exceptions used where appropriate (e.g., `DivisionByZeroError`, `InvalidOperandError`).
+
+---
+
+## Quick debugging tips
+- Use `caplog` in pytest to assert logged messages.
+- Run one failing test at a time to iterate quickly.
+- When changing exception types, keep backward compatibility in mind (subclassing built-ins).
+
+---
+
+## Want help?
+I can:
+- create or update the example files (`app/exceptions.py`, `app/operations.py`) for you,
+- run the tests and report the output,
+- generate an instructor rubric and slides for the A1 lesson.
+
+Tell me which you want next and I will proceed.
+
+````
 git push origin main
-```
-
-Then submit the GitHub repository link as instructed.
-
----
-
-# 🔥 Useful Commands Cheat Sheet
-
-| Action                         | Command                                          |
-| ------------------------------- | ------------------------------------------------ |
-| Install Homebrew (Mac)          | `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"` |
-| Install Git                     | `brew install git` or Git for Windows installer |
-| Configure Git Global Username  | `git config --global user.name "Your Name"`      |
-| Configure Git Global Email     | `git config --global user.email "you@example.com"` |
-| Clone Repository                | `git clone <repo-url>`                          |
-| Create Virtual Environment     | `python3 -m venv venv`                           |
-| Activate Virtual Environment   | `source venv/bin/activate` / `venv\Scripts\activate.bat` |
-| Install Python Packages        | `pip install -r requirements.txt`               |
-| Build Docker Image              | `docker build -t <image-name> .`                |
-| Run Docker Container            | `docker run -it --rm <image-name>`               |
-| Push Code to GitHub             | `git add . && git commit -m "message" && git push` |
-
----
-
-# 📋 Notes
-
-- Install **Homebrew** first on Mac.
-- Install and configure **Git** and **SSH** before cloning.
-- Use **Python 3.10+** and **virtual environments** for Python projects.
-- **Docker** is optional depending on the project.
-
----
-
-# 📎 Quick Links
-
-- [Homebrew](https://brew.sh/)
-- [Git Downloads](https://git-scm.com/downloads)
-- [Python Downloads](https://www.python.org/downloads/)
-- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
-- [GitHub SSH Setup Guide](https://docs.github.com/en/authentication/connecting-to-github-with-ssh)
